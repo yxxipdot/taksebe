@@ -1,0 +1,43 @@
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+
+public class hh3
+{
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("Введите размер массива N:");
+        int n = int.Parse(Console.ReadLine());
+
+        char[] arr = new char[n];
+        Console.WriteLine("Введите элементы массива:");
+        for (int i = 0; i < n; i++)
+        {
+            Console.Write((i + 1) + ": ");
+            arr[i] = char.Parse(Console.ReadLine());
+        }
+
+        Dictionary<char, int> duplicates = new Dictionary<char, int>();
+        for (int i = 0; i < n; i++)
+        {
+            if (duplicates.ContainsKey(arr[i]))
+            {
+                continue;
+            }
+            int count = 1;
+            for (int j = i + 1; j < n; j++)
+            {
+                if (arr[i] == arr[j])
+                {
+                    count++;
+                }
+            }
+            duplicates.Add(arr[i], count);
+        }
+        Console.WriteLine("Вхождения элементов массива:");
+        foreach (char c in duplicates.Keys)
+        {
+            Console.WriteLine($"[{c}]:{duplicates[c]}");
+        }
+    }
+}
